@@ -60,6 +60,7 @@ const movies = [
   },
 ];
 
+//controller for queries
 const resolvers = {
   Query: {
     movies: () => {
