@@ -1,0 +1,24 @@
+{
+  "name": "kungfu-api",
+  "version": "1.0.0",
+  "description": "Practice repo for learning how to create a GraphQL API with Apollo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montal95/kungfu-api.git"
+  },
+  "keywords": [],
+  "author": "Sam Montalvo Jr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/montal95/kungfu-api/issues"
+  },
+  "homepage": "https://github.com/montal95/kungfu-api#readme",
+  "dependencies": {
+    "apollo-server": "^2.19.2",
+    "graphql": "^15.4.0"
+  }
+}
