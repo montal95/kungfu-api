@@ -36,6 +36,25 @@ const typeDefs = gql`
   }
 `;
 
+const actors = [
+  {
+    id: "asdf",
+    name: "Philip Kwok",
+  },
+  {
+    id: "numberOne",
+    name: "Bruce Lee",
+  },
+  {
+    id: "donnie",
+    name: "Donnie Yen",
+  },
+  {
+    id: "siu",
+    name: "Siu-Wong Fan",
+  },
+];
+
 //Seed Data
 const movies = [
   {
@@ -46,7 +65,6 @@ const movies = [
     actor: [
       {
         id: "asdf",
-        name: "Philip Kwok",
       },
     ],
   },
@@ -58,7 +76,20 @@ const movies = [
     actor: [
       {
         id: "numberOne",
-        name: "Bruce Lee",
+      },
+    ],
+  },
+  {
+    id: "3",
+    title: "Ip Man",
+    releaseDate: new Date("10-1-2010"),
+    rating: 9,
+    actor: [
+      {
+        id: "donnie",
+      },
+      {
+        id: "siu",
       },
     ],
   },
@@ -78,6 +109,18 @@ const resolvers = {
       return foundMovie;
     },
   },
+
+  Movie: {
+    actor: (obj, arg, context) => {
+      //DB Call
+      const actorIds = obj.actor.map((actor) => actor.id);
+      const filteredActors = actors.filter((actor) => {
+        return actorIds.includes(actor.id);
+      });
+      return filteredActors;
+    },
+  },
+
   Date: new GraphQLScalarType({
     name: "Date",
     description: "it's a date, deal with it",
