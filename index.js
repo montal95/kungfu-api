@@ -4,7 +4,16 @@ const { Kind } = require("graphql/language");
 
 //Schema IS the type definition
 // Everything in the backticks is GraphQL syntax and not JS
+
+//gql`` parses string into an AST
 const typeDefs = gql`
+
+  # fragment cannot be created in the schema. This is an example
+  # fragment Meta on Movie {
+  #   releaseDate
+  #   rating
+  # }
+
   scalar Date
 
   enum Status {
