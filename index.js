@@ -21,7 +21,7 @@ const typeDefs = gql`
 
   type Movie {
     id: ID!
-    title: String
+    title: String!
     releaseDate: Date
     rating: Int
     status: Status
@@ -33,6 +33,23 @@ const typeDefs = gql`
   type Query {
     movies: [Movie]
     movie(id: ID): Movie
+  }
+
+  input ActorInput {
+    id: ID
+  }
+
+  input MovieInput {
+    id: ID
+    title: String
+    releaseDate: Date
+    rating: Int
+    status: Status
+    actor: [ActorInput]
+  }
+
+  type Mutation {
+    addMovie(movie: MovieInput): [Movie]
   }
 `;
 
@@ -121,6 +138,13 @@ const resolvers = {
     },
   },
 
+  Mutation: {
+    addMovie: (obj, { movie }, { userId }) => {
+      if (userId) return [...movies, movie];
+      return movies;
+    },
+  },
+
   Date: new GraphQLScalarType({
     name: "Date",
     description: "it's a date, deal with it",
@@ -146,6 +170,12 @@ const server = new ApolloServer({
   resolvers,
   introspection: true,
   playground: true,
+  context: ({ req }) => {
+    const fakeUser = {
+      userId: "helloImauser",
+    };
+    return { ...fakeUser };
+  },
 });
 
 server
